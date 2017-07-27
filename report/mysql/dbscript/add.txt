@@ -1,0 +1,10 @@
+ DELIMITER $$
+ CREATE FUNCTION add(i int)
+      RETURNS TEXT
+      LANGUAGE SQL
+      BEGIN
+      DECLARE C INT;
+	  set c=A+B;
+	  return(c);
+	  $$
+	  DELIMITER

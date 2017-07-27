@@ -1,0 +1,36 @@
+class maven_install::maven
+{
+#$maven_archive = "apache-maven-3.3.9-bin.tar.gz"
+
+
+        user { "maven":
+                ensure => 'present',
+                shell => '/bin/bash',
+                home => '/home/maven',
+                managehome => true,
+        }
+
+        file { "/opt/software/maven":
+                ensure => 'directory',
+                require => User['maven'],
+                owner => 'maven',
+                group => 'maven',
+        }
+        file { "/opt/software/maven/apache-maven-3.3.9-bin.tar.gz" :
+                ensure => 'present',
+                require => File['/opt/software/maven'],
+                source => 'puppet:///modules/maven_install/apache-maven-3.3.9-bin.tar.gz',
+        }
+        exec { "install" :
+ require => File['/opt/software/maven/apache-maven-3.3.9-bin.tar.gz'],
+               path => ["/bin/", "/usr/bin/", "/sbin/", "/usr/sbin/"],
+               cwd => '/opt/software/maven/',
+               command => 'tar -xvzf apache-maven-3.3.9-bin.tar.gz',
+       }
+       file { ".bashrc" :
+               path => '/home/maven/.bashrc',
+               content => template('maven_install/.bashrc'),
+       }
+
+
+}

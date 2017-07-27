@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE PROCEDURE a(IN n int,IN s Varchar(255))
+ BEGIN
+ SELECT  * FROM (SELECT * FROM sal ORDER BY age ASC LIMIT n) AS t where sal=s ORDER BY age DESC LIMIT 1 ;
+ END;
+ $$
+DELIMITER;

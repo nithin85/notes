@@ -1,0 +1,14 @@
+DELIMITER $$
+CREATE PROCEDURE inout(
+ IN id VARCHAR(25),
+ OUT total VARCHAR(255))
+BEGIN
+ SELECT uname
+ INTO total
+ FROM family
+ WHERE fid =id;
+END$$
+DELIMITER ;
+
+duplicate table
+create table dup AS select * from Tablename;

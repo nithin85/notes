@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE PROCEDURE He()
+BEGIN
+SELECT 'Hello world!' AS Message;
+END;
+$$
+DELIMITER;

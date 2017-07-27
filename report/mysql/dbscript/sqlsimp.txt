@@ -1,0 +1,11 @@
+DELIMITER $$
+ CREATE FUNCTION qrr(v varchar(50))
+      RETURNS varchar(1000)
+      LANGUAGE SQL
+      BEGIN
+	  DECLARE n varchar(1000);
+	  select uname into n from family where fid=v;
+	  return(n);
+      END;
+      $$
+	  DELIMITER;

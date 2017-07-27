@@ -1,0 +1,37 @@
+DELIMITER $$
+
+CREATE PROCEDURE SIM3()
+BEGIN
+DECLARE done INT DEFAULT FALSE;
+DECLARE A VARCHAR(30);
+DECLARE B VARCHAR(30);
+DECLARE cur1 CURSOR FOR SELECT age from sal;
+DECLARE cur2 CURSOR FOR SELECT name FROM age;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+OPEN cur1;
+OPEN cur2;
+ 
+ read_loop: LOOP
+    FETCH cur1 INTO A;
+    FETCH cur2 INTO B;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+	
+	set @stnt='INSERT INTO test VALUES (?,?)';
+	 prepare stmt from @stnt;
+	 set @a=A;
+	 set @b=B;
+	 Execute stmt using @a,@b;
+	 
+	 
+	END LOOP read_loop;
+	
+	CLOSE cur1;
+  CLOSE cur2;
+  END$$
+    
+DELIMITER ;
+
+

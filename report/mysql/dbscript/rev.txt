@@ -1,0 +1,17 @@
+DELIMITER $$
+ CREATE FUNCTION reve(v int)
+      RETURNS int
+      LANGUAGE SQL
+      BEGIN
+	  DECLARE n,rev int;
+	  set rev=0;
+	  select val into n from num where id=v;
+	  while n != 0 DO
+      set rev=rev*10;
+      set rev=rev+n%10;
+      set n=n/10;
+	  END WHILE; 
+	  return(rev);
+      END;
+      $$
+	  DELIMITER;

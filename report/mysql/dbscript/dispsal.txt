@@ -1,0 +1,5 @@
+create trigger trig before insert ON test for each row call SIM1()
+
+drop trigger trig;
+
+select sal,count(sal) from age group by sal having count(sal)>=1;
